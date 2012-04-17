@@ -1,6 +1,6 @@
 require File.expand_path('../test_helper.rb',__FILE__)
 
-class TestCertificateAuthentication <  Test::Unit::TestCase
+class TestCertificateAuthentication_SSLCertificate <  Test::Unit::TestCase
   def setup
     @my_cert = '/Users/me/Documents/media/certificates/personal-cert.pem'
     @ssl_certificate = CapyBrowser::CertificateAuthentication::SSLCertificate.new(@my_cert)
