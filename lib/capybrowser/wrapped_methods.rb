@@ -67,7 +67,7 @@ module CapyBrowser
         decl << %q{def METHOD_NAME(*args,&block)}
         decl = decl.join("\n")
         body = %q{    (block.class.to_s == 'Proc') ? WRAPPER_METHOD_NAME(*args,&block) : WRAPPER_METHOD_NAME(*args)}
-        body = body.gsub /WRAPPER_METHOD_NAME/, block.call(method_name.to_s) + '.METHOD_NAME'
+        body = body.gsub(/WRAPPER_METHOD_NAME/, block.call(method_name.to_s) + '.METHOD_NAME')
         generated_method_implementation(method_name,decl,body,"end")
       rescue
         raise "#{Module.nesting[0]}.#{__method__}() failed ->\n#{$!.message}"
@@ -80,7 +80,7 @@ module CapyBrowser
         decl << %q{def METHOD_NAME(value)}
         decl = decl.join("\n")
         body = %q{    WRAPPER_METHOD_NAME value}
-        body = body.gsub /WRAPPER_METHOD_NAME/, block.call(method_name.to_s) + '.METHOD_NAME'
+        body = body.gsub(/WRAPPER_METHOD_NAME/, block.call(method_name.to_s) + '.METHOD_NAME')
         generated_method_implementation(method_name,decl,body,"end")
       rescue
         raise "#{Module.nesting[0]}.#{__method__}() failed ->\n#{$!.message}"
