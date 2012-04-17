@@ -24,8 +24,8 @@ class TestRemoteCommunication_EncodedField < Test::Unit::TestCase
     assert_equal @titian,  @field.content
     assert_equal 'application/x-empty; charset=binary',  @field.content_type
     actual = @field.encode([]).join("\n")
-    assert_match /Content-Disposition/, actual
-    assert_match /Content-Type/, actual
+    assert_match(/Content-Disposition/, actual)
+    assert_match( /Content-Type/, actual)
   end
 
 end

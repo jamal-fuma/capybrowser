@@ -89,7 +89,7 @@ class TestRemoteCommunication_HttpRequest < Test::Unit::TestCase
       client.auth_user = nil
       response = client.request(@url)
     }
-    assert_match /Unauthorised access error \(401\)/, exception.message
+    assert_match(/Unauthorised access error \(401\)/, exception.message)
   end
 
   def test_raises_on_server_error
@@ -100,7 +100,7 @@ class TestRemoteCommunication_HttpRequest < Test::Unit::TestCase
       client = CapyBrowser::RemoteCommunication::HttpClient.new(@json_http_get)
       response = client.request(@url)
     }
-    assert_match /error code was \(500\)/, exception.message
+    assert_match(/error code was \(500\)/, exception.message)
   end
 
 

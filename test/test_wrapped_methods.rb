@@ -76,7 +76,7 @@ class TestWrappedMethods < Test::Unit::TestCase
       end
     end
     assert_equal "foobar", @obj.live
-    assert_match /#{Regexp.escape("dead() failed ->\nBlowing up now")}$/, assert_raises(RuntimeError){ @obj.dead }.message
+    assert_match(/#{Regexp.escape("dead() failed ->\nBlowing up now")}$/, assert_raises(RuntimeError){ @obj.dead }.message)
     assert_equal "Blowing up now", assert_raises(RuntimeError){ @obj.unprotected }.message
   end
 
