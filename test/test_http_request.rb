@@ -31,7 +31,7 @@ class TestRemoteCommunication_HttpRequest < Test::Unit::TestCase
 
   def test_http_request_verbs_are_checked_for_correctness
     exception = assert_raises(RuntimeError){
-      CapyBrowser::RemoteCommunication::HttpRequest.new(:goo,@headers)
+      CapyBrowser::RemoteCommunication::HttpRequest.new(:goo,@json_headers)
     }
     expected = "CapyBrowser::RemoteCommunication::HttpRequest.initialize() failed ->\nCapyBrowser::RemoteCommunication::HttpRequest.method=() failed ->\nHTTP Verb('goo') not supported"
     assert_equal expected, exception.message
