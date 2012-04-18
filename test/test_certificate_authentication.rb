@@ -6,6 +6,8 @@ class TestCertificateAuthentication <  Test::Unit::TestCase
     data = File.read(@my_cert)
     @cert = OpenSSL::X509::Certificate.new data
     @key  = OpenSSL::PKey::RSA.new(data,nil)
+    OpenSSL::X509::Certificate.stubs(:new).returns(@cert)
+    OpenSSL::PKey::RSA.stubs(:new).returns(@key)
   end
 
   def teardown
@@ -48,11 +50,9 @@ class TestCertificateAuthentication <  Test::Unit::TestCase
 
   def ssl_certificate_authenticate_success(ssl_certificate)
     http = mock("http")
-    OpenSSL::X509::Certificate.stubs(:new).returns(@cert)
-    OpenSSL::PKey::RSA.stubs(:new).returns(@key)
     http.expects(:verify_mode=).once.with(OpenSSL::SSL::VERIFY_NONE)
-    http.expects(:cert=).once.with(@cert)
-    http.expects(:key=).once.with(@key)
+    http.expects(:cert=).once
+    http.expects(:key=).once
     http.expects(:use_ssl).once.returns(true)
     assert_equal http,ssl_certificate.authenticate(http)
   end

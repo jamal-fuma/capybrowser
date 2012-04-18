@@ -3,12 +3,12 @@ require File.expand_path('../test_helper.rb',__FILE__)
 
 class TestProxiedConnection <  Test::Unit::TestCase
   def setup
+    @proxy_path = 'http://www-cache.reith.bbc.co.uk'
   end
   def test_indirect
     http = mock("http")
     http.expects(:use_ssl=).once.with(false)
     Net::HTTP.stubs(:new).returns(http)
-    @proxy_path = 'http://www-cache.reith.bbc.co.uk'
     uri = 'http://www.google.co.uk'
     proxy = CapyBrowser::ProxiedConnection::ProxyStrategyImpl.proxied_connection(@proxy_path)
     proxy.http(uri)

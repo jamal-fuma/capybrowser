@@ -90,7 +90,7 @@ class TestRemoteCommunication < Test::Unit::TestCase
   def test_encode_url_form_parameters
     request = mock("HttpRequest")
     request.expects(:set_form_data=).with([])
-    @json_http_get = CapyBrowser::RemoteCommunication::HttpRequest.new(:get,@json_headers)
+    @json_http_get = CapyBrowser::RemoteCommunication::HttpRequest.new(:get,@headers)
     @json_http_get.encode_url_form_parameters(request,[])
   end
   def test_put

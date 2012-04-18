@@ -76,7 +76,7 @@ class TestWrappedMethods < Test::Unit::TestCase
       end
     end
     assert_equal "foobar", @obj.live
-    assert_match /#{Regexp.escape("dead() failed ->\nBlowing up now")}$/, assert_raises(RuntimeError){ @obj.dead }.message
+    assert_match(/#{Regexp.escape("dead() failed ->\nBlowing up now")}$/, assert_raises(RuntimeError){ @obj.dead }.message)
     assert_equal "Blowing up now", assert_raises(RuntimeError){ @obj.unprotected }.message
   end
 
@@ -211,7 +211,7 @@ class TestWrappedMethods < Test::Unit::TestCase
 
     @obj.instance_eval do
       def to_blah
-        @title
+        @title ||= ''
       end
       class << self
         self.extend CapyBrowser::WrappedMethods
@@ -219,8 +219,6 @@ class TestWrappedMethods < Test::Unit::TestCase
         delegated_methods(:empty?){|method_name| 'self.to_blah' }
       end
     end
-    assert_nil @obj.to_blah
-    @obj.title = ''
     assert_true @obj.empty?
     @obj.title = 'foobar'
     assert_equal 'foobar', @obj.to_blah
@@ -238,7 +236,7 @@ class TestWrappedMethods < Test::Unit::TestCase
     assert_raises(RuntimeError){
       @obj.instance_eval do
         def to_blah
-          @title
+          nil
         end
         class << self
           self.extend CapyBrowser::WrappedMethods
