@@ -1,0 +1,5 @@
+#!/bin/bash
+find ./bin -type f
+find ./features -type f
+find ./lib -type f
+find ./test -type f

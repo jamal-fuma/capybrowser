@@ -54,7 +54,7 @@ module CapyBrowser
       end
     end
 
-    def build(proxy_path)
+    def build(proxy_path=ENV['HTTP_PROXY'])
       proxy = ProxyStrategyImpl.proxied_connection(proxy_path) rescue nil
       proxy ||= ProxyStrategyImpl.direct_connection
     end

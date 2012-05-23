@@ -1,6 +1,7 @@
 require 'test/unit'
 require 'capybrowser'
 require 'mocha'
+require 'ci/reporter/rake/test_unit_loader'
 
 module HttpMocksResponses
   def http_response(opts={})
@@ -61,4 +62,7 @@ module HttpMocksResponses
     #Net::HTTP.unstub(:get_response)
   end
 end
+
 ENV['CERT'] = '/Users/me/Documents/media/certificates/personal-cert.pem'
+ENV["CI_REPORTS"] = CapyBrowser::Rake::RelativePath.new('tmp/doc/tests/junit').path
+

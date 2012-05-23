@@ -14,6 +14,16 @@ require 'capybrowser/remote_communication/multipart_form_boundry'
 require 'capybrowser/remote_communication/encoded_field'
 require 'capybrowser/remote_communication/encoded_file'
 
+require 'capybrowser/rake'
+
 module CapyBrowser
-  # Your code goes here...
+  def gem
+    CapyBrowser::Rake::Gem.new('capybrowser',CapyBrowser::VERSION)
+  end
+
+  def bundler
+    CapyBrowser::Rake::Bundler.new(CapyBrowser.gem)
+  end
+
+  module_function :gem, :bundler
 end

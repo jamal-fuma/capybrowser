@@ -42,7 +42,6 @@ module CapyBrowser
         decl = decl.join("\n")
         body = %q{    self.WRAPPER_METHOD_NAME value}
         s = generated_method_implementation(method_name,decl,body,"end")
-        puts s
         s
       rescue
         raise "#{Module.nesting[0]}.#{__method__}() failed ->\n#{$!.message}"

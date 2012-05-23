@@ -4,7 +4,9 @@ class TestRemoteCommunication_HttpRequests_JSON < Test::Unit::TestCase
   include HttpMocksResponses
 
   def setup
-    @url = "http://bbcapi.thepcf.org.uk/actor/reference/-titian"
+    @url = "http://bbcapi.thepcf.org.uk/actor/reference/wilson-a-"
+    # titian seems to have disappeared -- @url = "http://bbcapi.thepcf.org.uk/actor/reference/-titian"
+    # @titian = %q%{"item_count":1,"items":[{"id":"4755","reference":"-titian","name":"Titian","surname":"Titian","forename":null,"birth_year":"1488","death_year":"1576","life_display_dates":"c.1488\u20131576","active_start_date":null,"active_end_date":null,"dbpedia":"Titian","ulan_id":"500031075","nationality":"Italian","artist_website":null,"active_dates":null,"qualifier":null,"painting_count":"74","last_updated":"2011-05-20 10:06:39","deleted":"false"}]}%
     @https_url = 'https://api.test.bbc.co.uk/sda/live/arts/artists/-titian'
 
     @json_headers = CapyBrowser::ContentNegotiation.json_content
@@ -13,8 +15,7 @@ class TestRemoteCommunication_HttpRequests_JSON < Test::Unit::TestCase
     @json_http_put = CapyBrowser::RemoteCommunication::HttpRequest.new(:put,@json_headers)
     @json_http_post = CapyBrowser::RemoteCommunication::HttpRequest.new(:post,@json_headers)
     @json_http_delete = CapyBrowser::RemoteCommunication::HttpRequest.new(:delete,@json_headers)
-
-    @titian = %q%{"item_count":1,"items":[{"id":"4755","reference":"-titian","name":"Titian","surname":"Titian","forename":null,"birth_year":"1488","death_year":"1576","life_display_dates":"c.1488\u20131576","active_start_date":null,"active_end_date":null,"dbpedia":"Titian","ulan_id":"500031075","nationality":"Italian","artist_website":null,"active_dates":null,"qualifier":null,"painting_count":"74","last_updated":"2011-05-20 10:06:39","deleted":"false"}]}%
+    @wilson = %q[{"item_count":1,"items":[{"id":"6","reference":"wilson-a-","name":"Wilson_A.","surname":"Wilson","forename":"A.","birth_year":null,"death_year":null,"life_display_dates":null,"active_start_date":null,"active_end_date":null,"dbpedia":null,"ulan_id":null,"nationality":null,"artist_website":null,"active_dates":null,"qualifier":null,"painting_count":"1","last_updated":"2011-03-19 17:24:33","deleted":"false"}]}]
     @http_200 = http_response
   end
 
@@ -27,7 +28,7 @@ class TestRemoteCommunication_HttpRequests_JSON < Test::Unit::TestCase
   end
 
   def test_get_json_request_200_response
-    @http_200.expects(:body).returns(@titian)
+    @http_200.expects(:body).returns(@wilson)
     @http_200.expects(:code).returns('200')
     response = @json_http_get.request(@url)
     assert_equal @http_200.body, response.body
@@ -35,7 +36,7 @@ class TestRemoteCommunication_HttpRequests_JSON < Test::Unit::TestCase
   end
 
   def test_put_json_request_200_response
-    @http_200.expects(:body).returns(@titian)
+    @http_200.expects(:body).returns(@wilson)
     @http_200.expects(:code).returns('200')
     response = @json_http_put.request(@url)
     assert_equal @http_200.code.to_i, response.code.to_i
@@ -43,7 +44,7 @@ class TestRemoteCommunication_HttpRequests_JSON < Test::Unit::TestCase
   end
 
   def test_post_json_request_200_response
-    @http_200.expects(:body).returns(@titian)
+    @http_200.expects(:body).returns(@wilson)
     @http_200.expects(:code).returns('200')
     response = @json_http_post.request(@url)
     assert_equal @http_200.code.to_i, response.code.to_i
@@ -51,7 +52,7 @@ class TestRemoteCommunication_HttpRequests_JSON < Test::Unit::TestCase
   end
 
   def test_delete_json_request_200_response
-    @http_200.expects(:body).returns(@titian)
+    @http_200.expects(:body).returns(@wilson)
     @http_200.expects(:code).returns('200')
     response = @json_http_delete.request(@url)
     assert_equal @http_200.code.to_i, response.code.to_i

@@ -31,13 +31,13 @@ class TestContentNegotiation < Test::Unit::TestCase
    end
 
   def test_content_negotiation_json_content
-    assert_equal ['accept','content-type'], @json_negotiation.header_names
+    assert_equal ['accept','content-type'].sort, @json_negotiation.header_names.sort
     assert_equal 'application/json', @json_negotiation.content_type
     assert_equal ['application/json'], @json_negotiation.get_fields('Accept')
  end
 
  def test_content_negotiation_urlencoded_content
-    assert_equal ['accept','content-type'], @urlencoded_negotiation.header_names
+    assert_equal ['accept','content-type'].sort, @urlencoded_negotiation.header_names.sort
     assert_equal 'application/x-www-form-urlencoded',@urlencoded_negotiation.content_type
     assert_equal ['application/xml'], @urlencoded_negotiation.get_fields('Accept')
  end
