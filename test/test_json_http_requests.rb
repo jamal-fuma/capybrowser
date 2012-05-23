@@ -51,7 +51,7 @@ class TestRemoteCommunication_HttpRequests_JSON < Test::Unit::TestCase
     assert_equal @http_200.body, response.body
   end
 
-  def test_delete_json_request_200_response
+  def xtest_delete_json_request_200_response
     @http_200.expects(:body).returns(@wilson)
     @http_200.expects(:code).returns('200')
     response = @json_http_delete.request(@url)
