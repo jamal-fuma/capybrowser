@@ -83,7 +83,7 @@ def cucumber_task(target,environment,url,prefix="")
   end
 end
 
-# register report output directories so rake creates them on demand
+# register application directories to hook into rake creating them on demand
 CapyBrowser::Rake.rake_directories.each{|dir|
   directory dir
 }

@@ -8,7 +8,7 @@ Fixed: 004 - BUG: test unit xml reports are missing
 008 - FEATURE: make cucumber.yml compatible with frameworks capybara
 009 - BUG: remove clean targets from test task rakefile
 010 - BUG: add bundle pack generation from sources
-011 - BUG: RelativePath should be relative to ENV['BUNDLE_GEMFILE']
+Fixed: 011 - BUG: RelativePath should be relative to ENV['BUNDLE_GEMFILE']
 Fixed: 012 - BUG: bootstrap.sh broken
 Fixed: 013 - BUG: bin/manifest not listed in gemspec
 Fixed: 014 - BUG: Deployment feature failing
