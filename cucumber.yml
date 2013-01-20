@@ -25,20 +25,20 @@ junit:      --format junit  --out <%= tmp_dir %>/junit
 reports:    -p junit -p html -p pretty -p profile
 
 # support targeting http environments
-test:       APP_HOST="http://www.test.bbc.co.uk"
-stage:      APP_HOST="http://www.stage.bbc.co.uk"
-int:        APP_HOST="http://www.int.bbc.co.uk"
-live:       APP_HOST="http://www.live.bbc.co.uk"
-production: APP_HOST="http://www.bbc.co.uk"
+test:       APP_HOST="http://www.test.example.co.uk"
+stage:      APP_HOST="http://www.stage.example.co.uk"
+int:        APP_HOST="http://www.int.example.co.uk"
+live:       APP_HOST="http://www.live.example.co.uk"
+production: APP_HOST="http://www.example.co.uk"
 
 # support targeting ssl environments
-ssl_test:       APP_HOST="https://www.ssl.test.bbc.co.uk"
-ssl_stage:      APP_HOST="https://www.ssl.stage.bbc.co.uk"
-ssl_int:        APP_HOST="https://www.ssl.int.bbc.co.uk"
-ssl_live:       APP_HOST="https://www.ssl.live.bbc.co.uk"
-ssl_production: APP_HOST="https://www.ssl.bbc.co.uk"
+ssl_test:       APP_HOST="https://www.ssl.test.example.co.uk"
+ssl_stage:      APP_HOST="https://www.ssl.stage.example.co.uk"
+ssl_int:        APP_HOST="https://www.ssl.int.example.co.uk"
+ssl_live:       APP_HOST="https://www.ssl.live.example.co.uk"
+ssl_production: APP_HOST="https://www.ssl.example.co.uk"
 
-virtual:        APP_HOST="http://pal.sandbox.dev.bbc.co.uk"
+virtual:        APP_HOST="http://pal.sandbox.dev.example.co.uk"
 
 # support targeting special environments
 sandbox:    -p virtual          -p certificate -p reports -p local_driver
