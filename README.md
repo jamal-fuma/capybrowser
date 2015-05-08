@@ -12,7 +12,7 @@ $ ( [ -d 'vendor/cache' ] || mkdir -p vendor/cache; )
 $ bundle install --binstubs=tmp/vendor/bin --path=tmp/vendor/bundle
 
 # Run Cucumber
-rake clean                                                    # Clean generated files
+```rake clean                                                    # Clean generated files
 rake features[opts]                                           # Run features against local test environment
 rake features:hudson:http:int[command_line_arguments]         # Run features against int environment at host http://www.int.example.co.uk
 rake features:hudson:http:live[command_line_arguments]        # Run features against live environment at host http://www.live.example.co.uk
@@ -39,3 +39,4 @@ rake gems:build                                               # Build the capybr
 rake gems:capybrowser                                         # Build the capybrowser-0.0.2.gem
 rake metrics:all                                              # Generate all metrics reports / Generate all metrics reports
 rake tests                                                    # Generate unit test coverage report
+```
