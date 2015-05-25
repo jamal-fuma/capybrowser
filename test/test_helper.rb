@@ -3,6 +3,10 @@ require 'capybrowser'
 require 'mocha'
 require 'ci/reporter/rake/test_unit_loader'
 
+require 'simplecov'
+SimpleCov.start
+
+
 module HttpMocksResponses
   def http_response(opts={})
     mock = mock('Net::HTTPResponse')

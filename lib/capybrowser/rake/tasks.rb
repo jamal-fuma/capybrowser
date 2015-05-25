@@ -95,7 +95,6 @@ ENV["CI_REPORTS"] = CapyBrowser::Rake::RelativePath.new('tmp/doc/tests/junit').p
 desc "Generate unit test coverage report"
 task(:tests => :directories) do |t|
   puts "Junit style xml Results end up here #{ENV['CI_REPORTS']}"
-  CapyBrowser::Rake.rcov(Dir.glob("test/**/test*.rb").join(" ")).invoke!
   puts "Completed Tests"
 end
 

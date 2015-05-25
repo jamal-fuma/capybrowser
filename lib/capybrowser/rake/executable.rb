@@ -20,16 +20,12 @@ module CapyBrowser
         [@path,@arguments].flatten.join(" ")
       end
 
-      def self.rcov(options=[])
-        Executable.new(CapyBrowser::Rake::RelativePath.new("tmp/vendor/bin/rcov").relative_path,options)
-      end
-
       def self.rake(options=[])
         Executable.new(CapyBrowser::Rake::RelativePath.new("tmp/vendor/bin/rake").relative_path,options)
       end
 
       def self.cucumber(options=[])
-        Executable.new("bundle exec rcov tmp/vendor/bin/cucumber",options)
+        Executable.new("bundle exec tmp/vendor/bin/cucumber",options)
       end
 
       def self.gem(options=[])
