@@ -37,20 +37,21 @@ module CapyBrowser
       def encode_request_entity(request,request_body)
         return case(request['content-type'])
 
-        when %r{^multipart/form-data, boundary=(.*)$} :
+        when %r{^multipart/form-data, boundary=(.*)$}
           encode_multipart_attachment(request,request_body)
 
-        when 'application/x-www-form-urlencoded' :
+        when 'application/x-www-form-urlencoded'
           encode_url_form_parameters(request,request_body)
 
-        when 'application/json':
+        when 'application/json'
           encode_string_data(request,request_body)
 
-        when 'application/xml' :
+        when 'application/xml'
           encode_string_data(request,request_body)
+
         else
           if (request_body.nil? || request_body.empty?)
-            return request
+            request
           end
           raise "Content-Type: '#{request['content-type']}' header not understood"
         end
