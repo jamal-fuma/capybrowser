@@ -7,4 +7,12 @@ gem 'cucumber'
 gem 'mocha'
 gem 'faraday', '0.8.9'
 gem 'stretcher'
-gem 'capybrowser', :path => '../../capybrowser'
+
+# uncomment for local development
+if File.directory?('../../capybrowser')
+    puts "Using: local version of capybrowser"
+    gem 'capybrowser', :path => '../../capybrowser'
+else
+    puts "Using: remote version of capybrowser"
+    gem 'capybrowser', :git => 'https://github.com/jamal-fuma/capybrowser.git', :branch => 'release_v0_0_5'
+end
