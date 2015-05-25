@@ -5,5 +5,6 @@ gem "rest-client"
 gem 'rspec'
 gem 'cucumber'
 gem 'mocha'
-
+gem 'faraday', '0.8.9'
+gem 'stretcher'
 gem 'capybrowser', :path => '../../capybrowser'

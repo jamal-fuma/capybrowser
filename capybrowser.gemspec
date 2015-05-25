@@ -32,4 +32,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'simplecov'
   s.add_runtime_dependency 'minitest'
   s.add_runtime_dependency 'rspec'
+  s.add_runtime_dependency 'stretcher'
 end
