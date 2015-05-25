@@ -1,6 +1,6 @@
 require File.expand_path('../test_helper.rb',__FILE__)
 
-class TestCertificateAuthentication <  Test::Unit::TestCase
+class TestCertificateAuthentication <  Minitest::Test
   def setup
     @my_cert = '/Users/me/Documents/media/certificates/personal-cert.pem'
     data = File.read(@my_cert)

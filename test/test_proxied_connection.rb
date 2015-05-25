@@ -1,7 +1,7 @@
 
 require File.expand_path('../test_helper.rb',__FILE__)
 
-class TestProxiedConnection <  Test::Unit::TestCase
+class TestProxiedConnection <  Minitest::Test
   def setup
     @proxy_path = 'http://www-cache.reith.bbc.co.uk'
   end

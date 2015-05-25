@@ -1,7 +1,7 @@
 
 require File.expand_path('../test_helper.rb',__FILE__)
 
-class TestRemoteCommunication_EncodedField < Test::Unit::TestCase
+class TestRemoteCommunication_EncodedField < Minitest::Test
   include HttpMocksResponses
 
   def setup

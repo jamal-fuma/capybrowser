@@ -1,11 +1,11 @@
-require 'test/unit'
-require 'capybrowser'
-require 'mocha'
-require 'ci/reporter/rake/test_unit_loader'
-
 require 'simplecov'
 SimpleCov.start
 
+require 'capybrowser'
+
+require 'minitest/autorun'
+require 'minitest/unit'
+require 'mocha/mini_test'
 
 module HttpMocksResponses
   def http_response(opts={})
