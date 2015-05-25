@@ -88,7 +88,7 @@ CapyBrowser::Rake.rake_directories.each{|dir|
   directory dir
 }
 
-require 'ci/reporter/rake/test_unit'
+require 'ci/reporter/rake/minitest'
 ENV["CI_REPORTS"] = CapyBrowser::Rake::RelativePath.new('tmp/doc/tests/junit').path
 
 # Gem unit test coverage reports
