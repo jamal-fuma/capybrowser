@@ -142,7 +142,7 @@ module CapyBrowser
         raise "#{Module.nesting[0]}.#{__method__}() failed ->\n#{$!.message}"
       end
     end
-    def named_constructors(*names,&block)
+    def named_constructors(names,&block)
       begin
         names.each{|name|
           self.class_eval named_constructor_implementation(name,&block)
