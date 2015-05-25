@@ -1,5 +1,13 @@
 # encoding: UTF-8
 require 'bundler/setup'
-require 'cucumber'
+
 require 'capybrowser'
+
+require 'simplecov'
+
+SimpleCov.start do
+    coverage_dir "tmp/doc/coverage"
+end
+
+require 'cucumber'
 require 'rspec'
