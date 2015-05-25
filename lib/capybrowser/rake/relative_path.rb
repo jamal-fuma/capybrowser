@@ -6,7 +6,7 @@ module CapyBrowser
       attr_reader :dirname, :path, :relative_path
 
       def initialize(path)
-        @dirname = File.dirname(ENV['BUNDLE_GEMFILE']) # File.expand_path('../../../../',__FILE__)
+        @dirname = File.dirname(ENV['BUNDLE_GEMFILE'])
         @path = relative path
         @relative_path = "./#{path}"
       end
