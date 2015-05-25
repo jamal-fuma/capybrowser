@@ -7,5 +7,5 @@ When /^I check for the version$/ do
 end
 
 Then /^I should see the correct version is reported$/ do
-  @actual_version.should == @expected_version
+  expect(@actual_version).to be == @expected_version
 end
