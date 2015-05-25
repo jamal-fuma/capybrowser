@@ -1,0 +1,79 @@
+# support proxy and certificates
+proxy: PROXY="<%= ENV['HTTP_PROXY'] %>"
+certificate: CERT="<%= ENV['CERT'] %>"
+
+# support multiple drivers
+local_driver:   DEFAULT_DRIVER="selenium"
+remote_driver:  DEFAULT_DRIVER="remote" REMOTE_URL='http://sel102:4444/wd/hub'
+
+# support running the not passing features
+manual:     -t @manual
+wip:        -t @wip --wip
+pending:    -t @pending --wip
+flickering: -t @flickering --wip
+failing:    -t @known_failure --wip
+
+# support running the passing features
+passing:    -t ~@manual,~@known_failure,~@pending,~@flickering,~@wip
+
+# reports output in junit/html/text formats
+<% tmp_dir  = './tmp/doc/cucumber' %>
+profile:    --format usage --out <%= tmp_dir %>/text/report.txt
+pretty:     --format pretty
+html:       --format html   --out <%= tmp_dir %>/html/report.html
+junit:      --format junit  --out <%= tmp_dir %>/junit
+reports:    -p junit -p html -p pretty -p profile
+
+# support targeting http environments
+test:       APP_HOST="http://www.test.example.co.uk"
+stage:      APP_HOST="http://www.stage.example.co.uk"
+int:        APP_HOST="http://www.int.example.co.uk"
+live:       APP_HOST="http://www.live.example.co.uk"
+production: APP_HOST="http://www.example.co.uk"
+
+# support targeting ssl environments
+ssl_test:       APP_HOST="https://www.ssl.test.example.co.uk"
+ssl_stage:      APP_HOST="https://www.ssl.stage.example.co.uk"
+ssl_int:        APP_HOST="https://www.ssl.int.example.co.uk"
+ssl_live:       APP_HOST="https://www.ssl.live.example.co.uk"
+ssl_production: APP_HOST="https://www.ssl.example.co.uk"
+
+virtual:        APP_HOST="http://pal.sandbox.dev.example.co.uk"
+
+# support targeting special environments
+sandbox:    -p virtual          -p certificate -p reports -p local_driver
+hudson:                -p proxy -p certificate -p reports -p remote_driver
+local:                 -p proxy -p certificate -p reports -p local_driver
+
+# support targeting environments on hudson
+hudson_test:  -p hudson -p test
+hudson_stage: -p hudson -p stage
+hudson_int:   -p hudson -p int
+hudson_live:  -p hudson -p live
+hudson_production:  -p hudson -p production
+
+# support targeting ssl environments on hudson
+hudson_ssl_test:  -p hudson -p ssl_test
+hudson_ssl_test:  -p hudson -p ssl_test
+hudson_ssl_stage: -p hudson -p ssl_stage
+hudson_ssl_int:   -p hudson -p ssl_int
+hudson_ssl_live:  -p hudson -p ssl_live
+hudson_ssl_production:  -p hudson -p ssl_production
+
+# support targeting environments on local machine
+local_test:  -p local -p test
+local_stage: -p local -p stage
+local_int:   -p local -p int
+local_live:  -p local -p live
+local_production:  -p local -p production
+
+# support targeting ssl environments on local machine
+local_ssl_test:  -p local -p ssl_test
+local_ssl_test:  -p local -p ssl_test
+local_ssl_stage: -p local -p ssl_stage
+local_ssl_int:   -p local -p ssl_int
+local_ssl_live:  -p local -p ssl_live
+local_ssl_production:  -p local -p ssl_production
+
+ci: -p hudson_test
+default: -p local_test
