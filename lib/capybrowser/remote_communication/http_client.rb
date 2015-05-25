@@ -18,14 +18,21 @@ module CapyBrowser
 
       def redirect(request_url,redirects)
         response = @http_request.request(request_url)
-        case response.code.to_i
-        when 301 : handle_301_redirection(response,request_url,redirects-1)
-        when 302 : handle_302_redirection(response,request_url,redirects-1)
-        when 303 : handle_303_redirection(response,request_url,redirects-1)
-
-        when 200..400 : return response
-
-        when 401 : handle_401_authentication_retry(response,request_url,redirects-1)
+        return case response.code.to_i
+        when 301
+            handle_301_redirection(response,request_url,redirects-1)
+        when 302
+            handle_302_redirection(response,request_url,redirects-1)
+        when 303
+            handle_303_redirection(response,request_url,redirects-1)
+        when 307
+            handle_303_redirection(response,request_url,redirects-1)
+        when 200..400
+            return response
+        when 401
+            handle_401_authentication_retry(response,request_url,redirects-1)
+        when 426
+            handle_426_upgrade_required(response,request_url,redirects-1)
         else
           raise "CapyBrowser::RemoteCommunication::HTTP error code was (#{response.code}) for #{request_url}"
         end
@@ -49,6 +56,12 @@ module CapyBrowser
         return CapyBrowser::RemoteCommunication::HTTP.get(next_path,@http_request.headers)
       end
 
+      def handle_307_redirection(response,request_url,redirects)
+        next_path = next_location(response['location'],request_url)
+        raise "Too many redirects followed to redirect again for 307 response: followed (#{redirects}) redirects while retrieving #{request_url}" unless redirects > 0
+        return CapyBrowser::RemoteCommunication::HTTP.post(next_path,@http_request.headers,"")
+      end
+
       def handle_401_authentication_retry(response,request_url,redirects)
         raise "Unauthorised access error (401) for #{request_url.to_s}" if @auth_user.nil?
         raise "Too many redirects followed to retry for 401 authentication failure: followed (#{redirects}) redirects for #{request_url}" unless redirects > 0
@@ -56,6 +69,11 @@ module CapyBrowser
         user_pass ||=  CapyBrowser::RemoteCommunication::HTTP.authorized_password
         @http_request.basic_auth(user_name,user_pass)
         return redirect(request_url,redirects)
+      end
+
+      def handle_426_upgrade_required(response,request_url,redirects)
+        raise "Too many redirects followed to retry for 426 upgrade of protocol: followed (#{redirects}) redirects for #{request_url}" unless redirects > 0
+        return response
       end
 
       def next_location(next_hop,uri)
