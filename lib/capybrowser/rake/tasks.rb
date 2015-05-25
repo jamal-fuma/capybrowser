@@ -113,5 +113,5 @@ namespace(:features) do
   cucumber_environment_profile_tasks(:local)
 
   desc("Run features against all environments [:hudson,:local,:sandbox]")
-  task(:all => [:tests,"features:hudson:all","features:local:all","features:sandbox"])
+  task(:all => [:tests,"features","features:sandbox"])
 end
