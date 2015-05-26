@@ -230,8 +230,9 @@ module CapyBrowser
          end
 
          def handle_http_errors(response,request_url,redirects)
-            raise "CapyBrowser::RemoteCommunication::HTTP 5xx code was (#{code}) for #{request_url} after following #{redirects} redirects"
+            raise "CapyBrowser::RemoteCommunication::HTTP 5xx code was (#{response.code}) for #{request_url} after following #{redirects} redirects"
          end
+
          wrapped_methods :initialize,
          :request,
          :redirect,
