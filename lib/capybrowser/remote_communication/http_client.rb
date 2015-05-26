@@ -77,6 +77,7 @@ module CapyBrowser
                raise "CapyBrowser::RemoteCommunication::HTTP error code was (#{code}) for #{request_url} after following #{redirects} redirects"
             end
          end
+
          def handle_200_okay(response)
             return response
          end
@@ -123,6 +124,7 @@ module CapyBrowser
                raise "CapyBrowser::RemoteCommunication::HTTP error code was (#{code}) for #{request_url} after following #{redirects} redirects"
             end
          end
+
          def handle_300_multiple_choices(response,request_url,redirects)
             next_path = next_location(response['location'],request_url)
             raise "Too many redirects followed to redirect again for 300 response: followed (#{redirects}) redirects while retrieving #{request_url}" unless redirects > 0
@@ -144,7 +146,6 @@ module CapyBrowser
          def handle_303_see_other(response,request_url,redirects)
             next_path = next_location(response['location'],request_url)
             raise "Too many redirects followed to redirect again for 303 response: followed (#{redirects}) redirects while retrieving #{request_url}" unless redirects > 0
-            redirect(next_path,redirects)
             return CapyBrowser::RemoteCommunication::HTTP.get(next_path,@http_request.headers)
          end
 
