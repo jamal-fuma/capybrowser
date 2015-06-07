@@ -55,10 +55,8 @@ module CapyBrowser
                encode_string_data(request,request_body)
 
             else
-               if (request_body.nil? || request_body.empty?)
+                  puts "warning Content-Type: '#{content_type}' header not understood"
                   request
-               end
-               raise "Content-Type: '#{request['content-type']}' header not understood"
             end
          end
 
