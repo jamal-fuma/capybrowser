@@ -19,12 +19,12 @@ module CapyBrowser
          end
 
          def request(uri)
-            puts "Parsing '#{uri}' as #{@class_name_str} URL: "
             @url  = CapyBrowser::URL.new(uri.to_s)
             @request = eval(@class_name_str).new(@url.request_uri, @header)
             client  = CapyBrowser::RemoteCommunication::HTTP.https(@url)
-            request_body = encode_request_entity(@request, @body) rescue @request
-            response(client,request_body)
+            request_body = encode_request_entity(@request, @body)
+            puts "Parsed '#{uri}' as request : with #{request_body.body.size} bytes of payload"
+            return response(client,request_body)
          end
 
          def headers
@@ -36,28 +36,31 @@ module CapyBrowser
          end
 
          def encode_request_entity(request,request_body)
-            content_type = request['Content-Type']
-            unless (request_body.nil? || request_body.empty?)
-               raise "Content-Type: '#{content_type}' header not understood" if content_type.nil?
+            # cannot encode an empty request
+            if(request_body.nil? || request_body.empty?)
+               request.body = ""
+               return request
             end
 
+            # we refuse to guess the content type
+            if request.content_type.nil?
+               raise "Content-Type: '#{request.inspect}' header not understood"
+            end
+
+            # Handle our special cases
             return case(content_type)
-            when %r{^multipart/form-data, boundary=(.*)$}
-               encode_multipart_attachment(request,request_body)
-
-            when 'application/x-www-form-urlencoded'
-               encode_url_form_parameters(request,request_body)
-
-            when 'application/json'
-               encode_string_data(request,request_body)
-
-            when 'application/xml'
-               encode_string_data(request,request_body)
-
-            else
-                  puts "warning Content-Type: '#{content_type}' header not understood"
-                  request
-            end
+                     when %r{^multipart/form-data, boundary=(.*)$}
+                         encode_multipart_attachment(request,request_body)
+                     when 'application/x-www-form-urlencoded'
+                         encode_url_form_parameters(request,request_body)
+                     when 'application/json'
+                         encode_string_data(request,request_body)
+                     when 'application/xml'
+                         encode_string_data(request,request_body)
+                     else
+                         puts "warning Content-Type: '#{content_type}' header not understood, content was: '#{request_body}'"
+                         encode_string_data(request,request_body)
+                     end
          end
 
          def encode_multipart_attachment(request,request_body)
@@ -72,7 +75,7 @@ module CapyBrowser
          end
 
          def encode_string_data(request,request_body)
-            raise "body content content type specified but not provided" if request_body.nil?
+            raise "body content content type specified but not provided" if (request_body.nil? || request_body.empty?)
             request.body = request_body
             request
          end

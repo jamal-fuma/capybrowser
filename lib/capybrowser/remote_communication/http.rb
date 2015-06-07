@@ -31,30 +31,29 @@ module CapyBrowser
         certificate.authenticate( http(uri) )
       end
 
-      def head(path,headers={},body='')
-        client = HttpClient.new HttpRequest.new(:head,headers,'')
-        client.request(path)
+      def head(path,headers={})
+        verb = HttpRequest.new(:head,headers,"")
+        return HttpClient.new(verb).request(path)
       end
 
-      def get(path,headers={},body="")
-        client = HttpClient.new HttpRequest.new(:get,headers,'')
-        client.request(path)
+      def get(path,headers={},body)
+        verb = HttpRequest.new(:get,headers,"")
+        return HttpClient.new(verb).request(path)
       end
 
-      def delete(path,headers={},body='')
-        puts "Calling http delete with URL '#{path}'"
+      def delete(path,headers={},body="")
         verb = HttpRequest.new(:delete,headers,body)
         return HttpClient.new(verb).request(path)
       end
 
-      def post(path,headers={},body='')
-        client = HttpClient.new HttpRequest.new(:post,headers,body)
-        client.request(path)
+      def post(path,headers={},body="")
+        verb = HttpRequest.new(:post,headers,body)
+        return HttpClient.new(verb).request(path)
       end
 
-      def put(path,headers={},body='')
-        client = HttpClient.new HttpRequest.new(:put,headers,body)
-        client.request(path)
+      def put(path,headers={},body="")
+        verb = HttpRequest.new(:put,headers,body)
+        return HttpClient.new(verb).request(path)
       end
       module_function :get,:head,:put,:post,:delete,:http,:https,:certificate,:proxy_uri,:certificate_filename,:authorized_username,:authorized_password
       wrapped_methods :get,:head,:put,:post,:delete,:http,:https,:certificate,:proxy_uri,:certificate_filename,:authorized_username,:authorized_password
