@@ -5,7 +5,7 @@ require 'capybrowser'
 
 require 'simplecov'
 SimpleCov.start do
-    coverage_dir "tmp/doc/coverage"
+   coverage_dir "tmp/doc/coverage"
 end
 
 require 'stretcher'

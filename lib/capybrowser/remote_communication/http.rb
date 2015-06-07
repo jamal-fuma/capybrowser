@@ -42,8 +42,9 @@ module CapyBrowser
       end
 
       def delete(path,headers={},body='')
-        client = HttpClient.new HttpRequest.new(:delete,headers,body)
-        client.request(path)
+        puts "Calling http delete with URL '#{path}'"
+        verb = HttpRequest.new(:delete,headers,body)
+        return HttpClient.new(verb).request(path)
       end
 
       def post(path,headers={},body='')

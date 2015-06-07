@@ -19,6 +19,7 @@ module CapyBrowser
       end
 
       def request(uri)
+        puts "Parsing '#{uri}' as #{@class_name_str} URL: "
         @url  = CapyBrowser::URL.new(uri.to_s)
         @request = eval(@class_name_str).new(@url.request_uri, @header)
         client  = CapyBrowser::RemoteCommunication::HTTP.https(@url)
