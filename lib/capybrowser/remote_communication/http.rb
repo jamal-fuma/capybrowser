@@ -31,12 +31,12 @@ module CapyBrowser
         certificate.authenticate( http(uri) )
       end
 
-      def head(path,headers={})
+      def head(path,headers={},body='')
         client = HttpClient.new HttpRequest.new(:head,headers,'')
         client.request(path)
       end
 
-      def get(path,headers={})
+      def get(path,headers={},body="")
         client = HttpClient.new HttpRequest.new(:get,headers,'')
         client.request(path)
       end

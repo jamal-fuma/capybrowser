@@ -10,7 +10,6 @@ module CapyBrowser
 
     def initialize(path)
       begin
-        puts "Parsing '#{path.inspect}' as URL: "
         path = path.to_s.strip
         @uri = URI.parse(path)
       rescue
