@@ -9,7 +9,8 @@ end
 
 Then /^I should see "(.*?)" in the report$/ do |coverage_report_title|
   @report.exists? == true
-  File.read(@report.path).should include coverage_report_title
+  content = File.read(@report.path)
+  expect(content).to include(coverage_report_title)
   @report = nil
 end
 
@@ -24,5 +25,6 @@ end
 
 Then /^I should see "(.*?)" clearly displayed within the report$/ do |coverage_report_title|
   @report.exists? == true
-  File.read(@report.path).should include coverage_report_title
+  content = File.read(@report.path)
+  expect(content).to include(coverage_report_title)
 end

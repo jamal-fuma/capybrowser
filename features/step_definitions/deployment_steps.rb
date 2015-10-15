@@ -10,8 +10,8 @@ end
 
 Then /^I should find a fresh build of the gem$/ do
   version = CapyBrowser::VERSION
-  @cmdline.should include "Successfully built RubyGem"
-  @cmdline.should include "Name: capybrowser"
-  @cmdline.should include "Version: #{version}"
-  @cmdline.should include "File: capybrowser-#{version}"
+  expect(@cmdline).to include("Successfully built RubyGem")
+  expect(@cmdline).to include("Name: capybrowser")
+  expect(@cmdline).to include("Version: #{version}")
+  expect(@cmdline).to include("File: capybrowser-#{version}")
 end

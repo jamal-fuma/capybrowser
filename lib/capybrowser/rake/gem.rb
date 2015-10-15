@@ -11,7 +11,7 @@ module CapyBrowser
         @builder = Executable.gem(['build',@gemspec])
         @gemspec_path = RelativePath.new(@gemspec)
         @gemfile_path = RelativePath.new(@gemfile)
-        @vendor_path = RelativePath.new('vendor/cache')
+        @vendor_path = RelativePath.new('tmp/vendor/cache')
         @tmpdir_path = RelativePath.new('tmp/gems')
       end
 

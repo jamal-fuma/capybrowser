@@ -11,7 +11,7 @@ class Simple
   end
 end
 
-class TestWrappedMethods < Test::Unit::TestCase
+class TestWrappedMethods < Minitest::Test
   include CapyBrowser::WrappedMethods
   def setup
     @obj = Class.new

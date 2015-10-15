@@ -2,7 +2,7 @@ require 'test/unit'
 
 require File.expand_path('../../tasks/task_helper',__FILE__)
 
-class TestTaskHelper < Test::Unit::TestCase
+class TestTaskHelper < Minitest::Test
   def test_env_tests_returns_empty_string_when_env_is_unset
     ENV['TESTS'] = nil
     assert_empty env_tests

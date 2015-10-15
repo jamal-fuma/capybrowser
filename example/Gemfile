@@ -1,0 +1,18 @@
+source 'https://rubygems.org'
+gem 'json'
+gem "rest-client"
+
+gem 'rspec'
+gem 'cucumber'
+gem 'mocha'
+gem 'faraday', '0.8.9'
+gem 'stretcher'
+
+# uncomment for local development
+if File.directory?('../../capybrowser')
+    puts "Using: local version of capybrowser"
+    gem 'capybrowser', :path => '../../capybrowser'
+else
+    puts "Using: remote version of capybrowser"
+    gem 'capybrowser', :git => 'https://github.com/jamal-fuma/capybrowser.git', :branch => 'release_v0_0_5'
+end

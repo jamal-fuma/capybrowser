@@ -23,7 +23,7 @@ def gem_build_task(gem,namespace_name=:gems)
 
     desc "Build all gems"
     task :rebuild do |t|
-      rm_rf('./tmp/gems')
+      rm_rf(gem_dir)
       Rake::Task["gems:build"].reenable
       Rake::Task["gems:build"].invoke
     end
@@ -33,7 +33,7 @@ def gem_build_task(gem,namespace_name=:gems)
       t.reenable
     end
 
-    file "vendor/cache/#{gem.gemfile}"  => [gem.gemfile_path.relative_path]
+    file "tmp/vendor/cache/#{gem.gemfile}"  => [gem.gemfile_path.relative_path]
     file gem.gemfile_path.relative_path => gem.gemfile
     file gem.gemfile => gem_dir do |t|
       puts gem.invoke!
@@ -88,14 +88,13 @@ CapyBrowser::Rake.rake_directories.each{|dir|
   directory dir
 }
 
-require 'ci/reporter/rake/test_unit'
+require 'ci/reporter/rake/minitest'
 ENV["CI_REPORTS"] = CapyBrowser::Rake::RelativePath.new('tmp/doc/tests/junit').path
 
 # Gem unit test coverage reports
 desc "Generate unit test coverage report"
-task(:tests => :directories) do |t|
+task(:tests => [:directories,"ci:setup:minitest"]) do |t|
   puts "Junit style xml Results end up here #{ENV['CI_REPORTS']}"
-  CapyBrowser::Rake.rcov(Dir.glob("test/**/test*.rb").join(" ")).invoke!
   puts "Completed Tests"
 end
 
@@ -114,5 +113,5 @@ namespace(:features) do
   cucumber_environment_profile_tasks(:local)
 
   desc("Run features against all environments [:hudson,:local,:sandbox]")
-  task(:all => [:tests,"features:hudson:all","features:local:all","features:sandbox"])
+  task(:all => [:tests,"features","features:sandbox"])
 end

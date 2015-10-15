@@ -1,6 +1,6 @@
 require File.expand_path('../test_helper.rb',__FILE__)
 
-class TestRemoteCommunication_MultiPartFormBoundry < Test::Unit::TestCase
+class TestRemoteCommunication_MultiPartFormBoundry < Minitest::Test
   include HttpMocksResponses
 
   def setup

@@ -1,6 +1,6 @@
 require File.expand_path('../test_helper', __FILE__)
 
-class TestURL < Test::Unit::TestCase
+class TestURL < Minitest::Test
   def setup
     @pcf_http_url  = "http://bbcapi.thepcf.org.uk/actor/reference/-titian"
     @bbc_http_url  = 'http://api.test.bbc.co.uk/sda/live/arts/artists/-titian'

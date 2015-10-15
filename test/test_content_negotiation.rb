@@ -1,6 +1,6 @@
 require File.expand_path('../test_helper.rb',__FILE__)
 
-class TestContentNegotiation < Test::Unit::TestCase
+class TestContentNegotiation < Minitest::Test
 
   def setup
     @negotiation = CapyBrowser::ContentNegotiation::Headers.new

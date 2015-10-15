@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Jamal M. Natour"]
   s.email       = ["jamal.natour@bbc.co.uk"]
 
-  s.homepage          = "https://repo.dev.bbc.co.uk/qa/capybrowser"
-  s.description       = 'C/I at the bbc presents some challenges, this is an attempt to solve some of them'
+  s.homepage          = "https://github.com/jamal-fuma/capybrowser"
+  s.description       = 'C/I at scale presents some challenges, this is an attempt to solve some of them'
   s.summary           = "capybrowser-#{CapyBrowser::VERSION}"
   s.rubyforge_project = "capybrowser"
 
@@ -24,12 +24,13 @@ Gem::Specification.new do |s|
 
   # dependencies
   s.add_runtime_dependency 'rake'
-  s.add_runtime_dependency 'metric_fu'
-  s.add_runtime_dependency 'ci_reporter'
   s.add_runtime_dependency 'cucumber'
+  s.add_runtime_dependency 'ci_reporter_cucumber'
+  s.add_runtime_dependency 'ci_reporter_minitest'
+  s.add_runtime_dependency 'ci_reporter_rspec'
   s.add_runtime_dependency 'mocha'
-  s.add_runtime_dependency 'test-unit'
-  s.add_runtime_dependency 'rcov'
+  s.add_runtime_dependency 'simplecov'
+  s.add_runtime_dependency 'minitest'
   s.add_runtime_dependency 'rspec'
-  s.add_runtime_dependency 'snailgun'
+  s.add_runtime_dependency 'stretcher'
 end

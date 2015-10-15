@@ -5,7 +5,7 @@ module CapyBrowser
 
     delegated_methods(:empty?){ |method_name| 'self.to_s' }
     delegated_methods(:host,:to_s,:user=,:+,:scheme,:port,:request_uri,:absolute?,:relative?){ |method_name| '@uri' }
-    named_constructors(:http,:https){|method_name| [%q{"METHOD_NAME://#{args.join("").gsub(/^((?:https|http):\/\/)/,"")}"}] }
+    named_constructors([:http,:https]){|method_name| [%q{"METHOD_NAME://#{args.join("").gsub(/^((?:https|http):\/\/)/,"")}"}] }
     predicate_methods(:https){|method_name| [%q{self.scheme == 'https'}] }
 
     def initialize(path)

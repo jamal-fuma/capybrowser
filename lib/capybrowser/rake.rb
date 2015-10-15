@@ -39,16 +39,11 @@ module CapyBrowser
       Executable.rake(options)
     end
 
-    def rcov(options="")
-      puts "calling rcov" if ENV["VERBOSE"]
-      Coverage.new({:rcov_opts => options}).rcov
-    end
-
     def cucumber(options="")
       puts "calling cucumber" if ENV["VERBOSE"]
       Coverage.new({:cuke_opts =>options}).cucumber
     end
 
-    module_function :rake,:rcov,:cucumber,:dependencies,:directories,:paths, :rake_directories
+    module_function :rake,:cucumber,:dependencies,:directories,:paths, :rake_directories
   end
 end
